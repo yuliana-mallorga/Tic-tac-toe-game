@@ -67,14 +67,26 @@ function App() {
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
       setWinner(newWinner)
+    }else if (checkEndGame(newBoard)){
+      setWinner(false) //empate
     }
+    console.log(winner, 'el ganador'); //No lo toma?
   }
 
+  const resetGame = () => {
+    setBoard(Array(9).fill(null))
+    setTurn(TURNS.X)
+    setWinner(null)
+  }
  
+  const checkEndGame = (newBoard) =>{
+    return newBoard.every((square) => {square !== null})
+  }
   return (
     <>
       <main className="board">
         <h1>Tic tac toe</h1>
+        <button onClick={resetGame}>Resetear el juego</button>
         <section className="game">
           {board.map((_, index) => {
             return (
@@ -96,6 +108,32 @@ function App() {
             {TURNS.O} 
           </Square>
         </section> 
+       <section>
+       {
+          winner !== null && (
+            <section>
+              <div className="winner">
+                <h2>
+                  { 
+                    winner === false
+                    ? 'Empate'
+                    : 'Gano'
+                  }
+                </h2>
+
+                <header className="win">
+                  { winner && <Square>{winner}</Square>}
+                </header>
+                <footer>
+                  <button onClick={resetGame}>
+                    Volver a empezar
+                  </button>
+                </footer>
+              </div>
+            </section>
+          )
+        }
+       </section>
       </main>
     </>
   );
