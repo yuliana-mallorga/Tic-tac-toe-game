@@ -7,9 +7,7 @@ import { checkWinnerFrom, checkEndGame } from "./logic/board";
 import { WinnerModal } from "./components/WinnerModal";
 
 function App() {
-  console.log('render');
   const [board, setBoard] = useState(()=>{
-    console.log('inicial;izar el tablero');
     const boardFromStorage = window.localStorage.getItem('board')
     return boardFromStorage ? JSON.parse(boardFromStorage) : Array(9).fill(null) 
   })
@@ -34,14 +32,12 @@ function App() {
     window.localStorage.setItem('turn', newTurn)
     //revisar si hay ganador
     const newWinner = checkWinnerFrom(newBoard)
-    debugger;
     if (newWinner) {
       setWinner(newWinner)
       confetti()
     }else if (checkEndGame(newBoard)){
       setWinner(false) //empate
     }
-   
   }
 
   const resetGame = () => {

@@ -11,7 +11,6 @@ export const checkWinnerFrom = (boardToCheck) => {
         boardToCheck[a] === boardToCheck[c]
 
       ) {
-        console.log(boardToCheck[a], "checkWinner funciona");
         return boardToCheck[a] // devuelve el ganador
       }
     }
@@ -21,5 +20,5 @@ export const checkWinnerFrom = (boardToCheck) => {
 
   export const checkEndGame = (newBoard) =>{
     //revisamos si hay empate, si no hay espacios vacios en el tablero.
-    return newBoard.every((square) => {square !== null})
+    return newBoard.every(square => Boolean(square))
   }
